@@ -298,10 +298,6 @@
       opacity: 0.8;
     }
 
-    .portfolio {
-      background: #f4efe7;
-    }
-
     .portfolio-grid {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
@@ -455,6 +451,10 @@
       border-top: 1px solid rgba(255,255,255,0.1);
     }
 
+    footer a {
+      color: #f4efe7;
+    }
+
     .reveal {
       opacity: 0;
       transform: translateY(40px);
@@ -477,11 +477,17 @@
       }
 
       .hero h1 {
-        letter-spacing: -4px;
+        font-size: 56px;
+        line-height: 0.9;
+        letter-spacing: -3px;
+      }
+
+      .hero p {
+        font-size: 16px;
       }
 
       .hero-visual {
-        height: 480px;
+        height: 420px;
         transform: none;
       }
 
@@ -509,26 +515,6 @@
         letter-spacing: -2px;
       }
     }
-    .page-transition {
-  position: fixed;
-  inset: 0;
-  background: #050505;
-  z-index: 9999;
-  transform: scaleY(0);
-  transform-origin: bottom;
-  pointer-events: none;
-  transition: transform 0.55s cubic-bezier(.77,0,.175,1);
-}
-
-.page-transition.active {
-  transform: scaleY(1);
-  transform-origin: bottom;
-}
-
-.page-transition.exit {
-  transform: scaleY(0);
-  transform-origin: top;
-}
   </style>
 </head>
 
@@ -555,6 +541,7 @@
         We don’t follow trends — we design unique environments that reflect personality,
         lifestyle and emotion.
       </p>
+
       <div class="buttons">
         <a href="#work" class="btn btn-dark">View Projects</a>
         <a href="#contact" class="btn btn-light">Start a Project</a>
@@ -703,67 +690,32 @@
     </a>
   </section>
 
- <footer>
-  <p>© 2026 HouseThat. All Rights Reserved.</p>
+  <footer>
+    <p>© 2026 HouseThat. All Rights Reserved.</p>
 
-  <p>
-    <a href="https://www.instagram.com/housethat.co" target="_blank">Instagram</a> •
-    <a href="https://www.linkedin.com/in/anita-shah-55973a144 " target="_blank">LinkedIn</a> •
-    <a href="https://share.google/UdGgdHJrHTEwjmu0A" target="_blank">Google Business</a>
-  </p>
-</footer>
+    <p>
+      <a href="https://www.instagram.com/housethat.co" target="_blank">Instagram</a> •
+      <a href="https://www.linkedin.com/in/anita-shah-55973a144" target="_blank">LinkedIn</a> •
+      <a href="https://share.google/UdGgdHJrHTEwjmu0A" target="_blank">Google Business</a>
+    </p>
+  </footer>
 
   <script>
+    const reveals = document.querySelectorAll('.reveal');
 
-<div class="page-transition"></div>
+    function revealOnScroll() {
+      reveals.forEach(section => {
+        const top = section.getBoundingClientRect().top;
 
-<script>
-  const transitionLayer = document.querySelector('.page-transition');
+        if (top < window.innerHeight - 100) {
+          section.classList.add('active');
+        }
+      });
+    }
 
-  document.querySelectorAll('a[href^="#"]').forEach(link => {
-    link.addEventListener('click', function(e) {
-      e.preventDefault();
-
-      const targetId = this.getAttribute('href');
-      const targetSection = document.querySelector(targetId);
-
-      if (!targetSection) return;
-
-      transitionLayer.classList.add('active');
-
-      setTimeout(() => {
-        targetSection.scrollIntoView({ behavior: 'auto' });
-
-        transitionLayer.classList.add('exit');
-        transitionLayer.classList.remove('active');
-
-        setTimeout(() => {
-          transitionLayer.classList.remove('exit');
-        }, 600);
-      }, 550);
-    });
-  });
-
-  const reveals = document.querySelectorAll('.reveal');
-
-  function revealOnScroll() {
-    reveals.forEach(section => {
-      const top = section.getBoundingClientRect().top;
-      if (top < window.innerHeight - 100) {
-        section.classList.add('active');
-      }
-    });
-  }
-
-  window.addEventListener('scroll', revealOnScroll);
-  revealOnScroll();
-</script>
-
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll();
   </script>
 
-  
-<div class="page-transition"></div>
-
-  
 </body>
 </html>
